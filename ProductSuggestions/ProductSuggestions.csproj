@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\0002 - CreateTables.sql" />
+    <None Remove="Scripts\0003 - ImportProducts.sql" />
+    <None Remove="Scripts\0004 - ImportProducts.sql" />
+    <None Remove="Scripts\0005 - ImportProducts.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\0002 - CreateTables.sql" />
+    <EmbeddedResource Include="Scripts\0005 - ImportProducts.sql" />
+    <EmbeddedResource Include="Scripts\0004 - ImportProducts.sql" />
+    <EmbeddedResource Include="Scripts\0003 - ImportProducts.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
+    <PackageReference Include="Dapper.SqlBuilder" Version="2.0.35" />
+    <PackageReference Include="dbup" Version="4.4.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.Types.Filters" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.Types.Sorting" Version="10.5.3" />
+    <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="10.5.3" />
+    <PackageReference Include="MartinCostello.SqlLocalDb" Version="3.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>
