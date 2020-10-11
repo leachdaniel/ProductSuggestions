@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace ProductSuggestions
 {
-    public class ProductsQuery : ObjectTypeExtension
+    [ExtendObjectType(Name = "Query")]
+    public class ProductsQuery
     {
 
         public ProductsQuery(IProductsRepository productsRepository)
@@ -17,19 +18,12 @@ namespace ProductSuggestions
             _productsRepository = productsRepository;
         }
 
-
-        protected override void Configure(IObjectTypeDescriptor descriptor)
+        [GraphQLDescription("provides product information")]
+        [GraphQLType(typeof(ProductType))]
+        public Task<Product?> GetByProductIDAsync(int productID)
         {
-            descriptor.Name("Query");
-
-            descriptor.Field("byProductID")
-                    .Argument("productID", _ => _.Type<IntType>().Description("The identifier of the product to lookup."))
-                 .Description("provides product information")
-                 .Type<ProductType>()
-                 .Resolver(_ => _productsRepository.GetAsync(_.Argument<int>("productID")));
-
+            return _productsRepository.GetAsync(productID);
         }
-
 
         private readonly IProductsRepository _productsRepository;
 

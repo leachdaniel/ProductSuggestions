@@ -21,10 +21,12 @@
     <None Remove="Scripts\0003 - ImportProducts.sql" />
     <None Remove="Scripts\0004 - ImportProducts.sql" />
     <None Remove="Scripts\0005 - ImportProducts.sql" />
+    <None Remove="Scripts\0006 - IX_Products_Category.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\0002 - CreateTables.sql" />
+    <EmbeddedResource Include="Scripts\0006 - IX_Products_Category.sql" />
     <EmbeddedResource Include="Scripts\0005 - ImportProducts.sql" />
     <EmbeddedResource Include="Scripts\0004 - ImportProducts.sql" />
     <EmbeddedResource Include="Scripts\0003 - ImportProducts.sql" />
