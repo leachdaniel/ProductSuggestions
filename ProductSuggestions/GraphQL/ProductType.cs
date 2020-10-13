@@ -21,6 +21,8 @@ namespace ProductSuggestions
         {
             descriptor.Name("Product");
 
+            // HotChocolate as of 10.5.3 doesn't seem to support inheriting descriptions from the interface type
+
             descriptor.Field(_ => _.ProductID).Description("unique identifier for a product");
 
             descriptor.Field(_ => _.Name).Description("the name of the product");
