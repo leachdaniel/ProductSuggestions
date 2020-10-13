@@ -24,5 +24,13 @@ namespace ProductSuggestions.Tests.Unit.Products
 
             Assert.IsFalse(product.Available);
         }
+
+        [TestMethod]
+        public void ShowAvailable()
+        {
+            var product = new Product(1, "name", "cat", 1.0m, 1, true);
+
+            Assert.IsFalse(product.Available);
+        }
     }
 }
