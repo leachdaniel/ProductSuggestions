@@ -10,6 +10,17 @@ namespace ProductSuggestions.DataAccess
 {
     public class ProductsDbConnection : DapperDbConnection<SqlConnection>, IProductsDbConnection
     {
-        public ProductsDbConnection(ISqlLocalDbInstanceInfo db) : base($"{db.GetConnectionString()};MultipleActiveResultSets=True") { }
+        public ProductsDbConnection(ISqlLocalDbInstanceInfo db) : base($"{GetRunningConnectionString(db)};MultipleActiveResultSets=True") { }
+
+
+        public static string GetRunningConnectionString(ISqlLocalDbInstanceInfo db)
+        {
+            if (!db.IsRunning)
+            {
+                db.Manage().Start();
+            }
+
+            return db.GetConnectionString();
+        }
     }
 }

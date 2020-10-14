@@ -26,10 +26,10 @@ namespace ProductSuggestions.CreateDatabase
             services.AddSingleton(sp =>
             {
                 ISqlLocalDbInstanceInfo instance = sp.GetRequiredService<SqlLocalDbApi>().GetOrCreateInstance("ProductSuggestions");
-                ISqlLocalDbInstanceManager manager = instance.Manage();
 
                 if (!instance.IsRunning)
                 {
+                    ISqlLocalDbInstanceManager manager = instance.Manage();
                     manager.Start();
                 }
 
