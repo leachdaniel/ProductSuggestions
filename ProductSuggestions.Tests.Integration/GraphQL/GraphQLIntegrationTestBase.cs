@@ -1,39 +1,43 @@
 ﻿using JsonDiffPatchDotNet;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ProductSuggestions.Tests.Integration.Startup;
+using System;
 using System.IO;
 using System.Net.Http;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace ProductSuggestions.Tests.Integration.GraphQL
 {
-    [TestClass]
     public class GraphQLIntegrationTestBase
     {
-        protected HttpClient Client => Initialize.Client;
+        private readonly InitializeFixture _fixture;
+
+        public GraphQLIntegrationTestBase(InitializeFixture fixture)
+        {
+            _fixture = fixture;
+        }
+        protected HttpClient Client => _fixture.Client;
 
         protected async Task AssertQueryReturnsExpectedDataAsync(string query, [CallerFilePath] string filePath = null, [CallerMemberName] string methodName = null)
         {
             using var result = await Client.PostAsJsonAsync(string.Empty, new { query });
 
-            Assert.AreEqual(System.Net.HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal(System.Net.HttpStatusCode.OK, result.StatusCode);
 
-            Assert.IsNotNull(result.Content);
+            Assert.NotNull(result.Content);
 
             var jToken = await result.Content.ReadAsAsync<JToken>();
 
-            Assert.IsNotNull(jToken);
-            Assert.IsInstanceOfType(jToken, typeof(JObject));
+            Assert.NotNull(jToken);
+            Assert.IsType<JObject>(jToken);
             var errors = jToken.SelectToken("errors") as JArray;
 
-            Assert.IsNull(errors, errors?.ToString(Formatting.Indented));
+            Assert.Null(errors);
 
             var data = jToken.SelectToken("data") as JObject;
-            Assert.IsNotNull(data);
+            Assert.NotNull(data);
 
             JToken expected = GetExpectedJson(filePath, methodName);
 
@@ -41,7 +45,9 @@ namespace ProductSuggestions.Tests.Integration.GraphQL
 
             var diff = patch.Diff(expected, data);
 
-            Assert.IsNull(diff, "Json Had the following differences:\n\n:" + diff?.ToString(Formatting.Indented));
+            Console.WriteLine("Json Had the following differences:\n\n:" + diff?.ToString(Formatting.Indented));
+
+            Assert.Null(diff);
         }
 
         private JToken GetExpectedJson(string filePath, string methodName)

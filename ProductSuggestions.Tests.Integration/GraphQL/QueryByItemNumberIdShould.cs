@@ -1,40 +1,33 @@
-﻿using JsonDiffPatchDotNet;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using ProductSuggestions.Tests.Integration.Startup;
-using System.IO;
-using System.Net.Http;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xunit;
 
 namespace ProductSuggestions.Tests.Integration.GraphQL
 {
-    [TestClass]
-    public class QueryByProductIDShould : GraphQLIntegrationTestBase
+    public class QueryByItemNumberIdShould : GraphQLIntegrationTestBase
     {
-        [TestMethod]
+        public QueryByItemNumberIdShould(InitializeFixture fixture) : base(fixture) { }
+        
+        [Fact]
         public async Task ReturnAllFields()
         {
             string query = @"
                 {
-                  byProductID(productID: 4)
+                  byItemNumberId(itemNumberId: 4)
                   {
-                    productID
+                    itemNumberId
                     name
                     category
                     available
                     price
                     upsells {
-                      productID
+                      itemNumberId
                       name
                       category
                       available
                       price
                     }
                     downsells {
-                      productID
+                      itemNumberId
                       name
                       category
                       available

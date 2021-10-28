@@ -1,11 +1,6 @@
-﻿using HotChocolate;
-using HotChocolate.Types;
-using HotChocolate.Types.Descriptors;
+﻿using HotChocolate.Types;
 using ProductSuggestions.Products;
 using ProductSuggestions.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ProductSuggestions
 {
@@ -23,7 +18,7 @@ namespace ProductSuggestions
 
             // HotChocolate as of 10.5.3 doesn't seem to support inheriting descriptions from the interface type
 
-            descriptor.Field(_ => _.ProductID).Description("unique identifier for a product");
+            descriptor.Field(_ => _.ItemNumberId).Description("unique identifier for a product");
 
             descriptor.Field(_ => _.Name).Description("the name of the product");
 
@@ -31,20 +26,12 @@ namespace ProductSuggestions
 
             descriptor.Field(_ => _.Price).Description("the price the product is sold for");
 
-            descriptor.Field(_ => _.Available).Description("true if the product can be sold");
+            descriptor.Field(_ => _.VirtualGroupId).Description("the group this product belongs to");
 
-            descriptor.Field("downsells")
-                 .Description("suggested lower priced products")
-                 .Type<ListType<IProductSuggestionType>>()
-                 .Resolver(_ => _productsRepository.GetSuggestionsAsync(_.Parent<Product>(), SellMode.Downsell));
-
-            descriptor.Field("upsells")
-                 .Description("suggested higher priced products")
-                 .Type<ListType<IProductSuggestionType>>()
-                 .Resolver(_ => _productsRepository.GetSuggestionsAsync(_.Parent<Product>(), SellMode.Upsell));
-
-            descriptor.Field(_ => _.Cancelled).Ignore();
-            descriptor.Field(_ => _.QuantityOnHand).Ignore();
+            descriptor.Field("groupMembers")
+                 .Description("groupMembers")
+                 .Type<ListType<IGroupMemberType>>()
+                 .Resolver(_ => _productsRepository.GetMembersAsync(_.Parent<Product>()));
         }
 
 

@@ -1,28 +1,22 @@
 ﻿using Dapper.Contrib.Extensions;
-using HotChocolate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductSuggestions.Products
 {
-    public class Product : IProductSuggestion
+    public class Product : IGroupMember
     {
-        public Product(int productID, string name, string category, decimal price, int quantityOnHand, bool cancelled = false)
+        public Product(int itemNumberId, string name, string category, decimal price, int? virtualGroupId)
         {
-            ProductID = productID;
+            ItemNumberId = itemNumberId;
             Name = name;
             Category = category;
             Price = price;
-            QuantityOnHand = quantityOnHand;
-            Cancelled = cancelled;
+            VirtualGroupId = virtualGroupId;
         }
 
         protected Product() { }
 
         [Key]
-        public int ProductID { get; private set; }
+        public int ItemNumberId { get; private set; }
 
         public string Name { get; private set; } = "Unknown";
 
@@ -30,10 +24,6 @@ namespace ProductSuggestions.Products
 
         public decimal Price { get; private set; }
 
-        public int QuantityOnHand { get; private set; }
-
-        public bool Cancelled { get; private set; }
-
-        public bool Available => !Cancelled && QuantityOnHand > 0;
+        public int? VirtualGroupId { get; private set; }
     }
 }

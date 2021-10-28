@@ -1,27 +1,27 @@
 {
-  "byProductID": {
-    "productID": 4,
+  "byItemNumberId": {
+    "itemNumberId": 4,
     "name": "Mr. Coffee Coffee Maker",
     "category": "Coffee Maker",
     "available": true,
     "price": 68.44,
     "upsells": [
       {
-        "productID": 13,
+        "itemNumberId": 13,
         "name": "Cuisinart SS-15P1 Coffee Center",
         "category": "Coffee Maker",
         "available": true,
         "price": 159.99
       },
       {
-        "productID": 8,
+        "itemNumberId": 8,
         "name": "Hamilton Beach FlexBrew Coffee Maker",
         "category": "Coffee Maker",
         "available": true,
         "price": 109.68
       },
       {
-        "productID": 6,
+        "itemNumberId": 6,
         "name": "Cuisinart DCC-3200P1 Perfectemp Coffee Maker",
         "category": "Coffee Maker",
         "available": true,
@@ -30,21 +30,21 @@
     ],
     "downsells": [
       {
-        "productID": 2,
+        "itemNumberId": 2,
         "name": "Hamilton Beach Coffee Maker",
         "category": "Coffee Maker",
         "available": true,
         "price": 60.67
       },
       {
-        "productID": 9,
+        "itemNumberId": 9,
         "name": "Sboly Single Serve Coffee Maker Brewer",
         "category": "Coffee Maker",
         "available": true,
         "price": 58.96
       },
       {
-        "productID": 5,
+        "itemNumberId": 5,
         "name": "Mr. Coffee Simple Brew Coffee Maker",
         "category": "Coffee Maker",
         "available": true,

@@ -1,9 +1,7 @@
 ﻿using Dapper;
 using ProductSuggestions.DataAccess;
 using ProductSuggestions.Products;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProductSuggestions.Repositories
@@ -15,33 +13,20 @@ namespace ProductSuggestions.Repositories
             Conn = conn;
         }
 
-        public async Task<IEnumerable<IProductSuggestion>> GetSuggestionsAsync(Product product, SellMode sellMode, int limit = 3)
+        public async Task<IEnumerable<IGroupMember>> GetMembersAsync(Product product)
         {
             var sb = new SqlBuilder();
             var sql = sb.AddTemplate(@"
-                SELECT TOP (@limit) *
+                SELECT *
                   FROM dbo.Products AS p
                  /**where**/
                 ORDER BY p.Price DESC
             ", product);
 
-            sb.AddParameters(new { limit });
-
             sb.Where(@"
-                    p.Category = @Category
-                AND p.ProductID <> @ProductID
-                AND p.Cancelled = 0
-                AND p.QuantityOnHand > 0
+                    p.VirtualGroupId = @VirtualGroupId
+                AND p.ItemNumberId <> @ItemNumberId
             ");
-
-            if (sellMode == SellMode.Downsell)
-            {
-                sb.Where("p.Price <= @Price");
-            }
-            else
-            {
-                sb.Where("p.Price >= @Price");
-            }
 
             return await Conn.QueryAsync<Product>(sql.RawSql, sql.Parameters);
         }
@@ -50,8 +35,6 @@ namespace ProductSuggestions.Repositories
 
         public IProductsDbConnection Conn { get; }
 
-        public Task<Product?> GetAsync(int productID) => Conn.GetAsync<Product>(productID);
-
-
+        public Task<Product?> GetAsync(int itemNumberId) => Conn.GetAsync<Product>(itemNumberId);
     }
 }

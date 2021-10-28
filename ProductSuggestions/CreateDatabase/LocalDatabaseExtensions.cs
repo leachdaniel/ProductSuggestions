@@ -25,7 +25,7 @@ namespace ProductSuggestions.CreateDatabase
             services.AddSingleton(sp => new SqlLocalDbApi(options, sp.GetRequiredService<ILoggerFactory>()));
             services.AddSingleton(sp =>
             {
-                ISqlLocalDbInstanceInfo instance = sp.GetRequiredService<SqlLocalDbApi>().GetOrCreateInstance("ProductSuggestions");
+                ISqlLocalDbInstanceInfo instance = sp.GetRequiredService<SqlLocalDbApi>().GetOrCreateInstance("Demo2");
 
                 if (!instance.IsRunning)
                 {

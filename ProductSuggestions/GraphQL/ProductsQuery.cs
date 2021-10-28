@@ -20,9 +20,9 @@ namespace ProductSuggestions
 
         [GraphQLDescription("provides product information")]
         [GraphQLType(typeof(ProductType))]
-        public Task<Product?> GetByProductIDAsync(int productID)
+        public Task<Product?> GetByItemNumberIdAsync(int itemNumberId)
         {
-            return _productsRepository.GetAsync(productID);
+            return _productsRepository.GetAsync(itemNumberId);
         }
 
         private readonly IProductsRepository _productsRepository;
