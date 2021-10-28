@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProductSuggestions.Repositories;
+using ProductSuggestions.Tests.Integration.GraphQL;
 
 namespace ProductSuggestions.Tests.Integration
 {
@@ -10,6 +11,7 @@ namespace ProductSuggestions.Tests.Integration
         {
             services.AddSingleton<InitializeFixture>();
             services.AddSingleton(sp => sp.GetRequiredService<InitializeFixture>().Client);
+            services.AddTransient<GraphQLIntegrationTestHelper>();
 
             services.AddTransient(sp => sp.GetRequiredService<InitializeFixture>().Services.GetRequiredService<IProductsRepository>());
 

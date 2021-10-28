@@ -1,0 +1,29 @@
+{
+  "byItemNumberId": {
+    "itemNumberId": 13,
+    "virtualGroupId": 1,
+    "price": 159.99,
+    "category": "Coffee Maker",
+    "name": "Cuisinart SS-15P1 Coffee Center (black)",
+    "groupMembers": [
+      {
+        "itemNumberId": 16,
+        "category": "Coffee Maker",
+        "price": 165.99,
+        "name": "Cuisinart SS-15P1 Coffee Center (stainless steel)"
+      },
+      {
+        "itemNumberId": 15,
+        "category": "Coffee Maker",
+        "price": 163.99,
+        "name": "Cuisinart SS-15P1 Coffee Center (white)"
+      },
+      {
+        "itemNumberId": 14,
+        "category": "Coffee Maker",
+        "price": 159.99,
+        "name": "Cuisinart SS-15P1 Coffee Center (red)"
+      }
+    ]
+  }
+}

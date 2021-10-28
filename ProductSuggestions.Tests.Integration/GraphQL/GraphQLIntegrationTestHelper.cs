@@ -7,20 +7,23 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.DependencyInjection;
 
 namespace ProductSuggestions.Tests.Integration.GraphQL
 {
-    public class GraphQLIntegrationTestBase
+    public class GraphQLIntegrationTestHelper
     {
         private readonly InitializeFixture _fixture;
+        private readonly ITestOutputHelperAccessor _testOutput;
 
-        public GraphQLIntegrationTestBase(InitializeFixture fixture)
+        public GraphQLIntegrationTestHelper(InitializeFixture fixture, ITestOutputHelperAccessor testOutput)
         {
             _fixture = fixture;
+            _testOutput = testOutput;
         }
         protected HttpClient Client => _fixture.Client;
 
-        protected async Task AssertQueryReturnsExpectedDataAsync(string query, [CallerFilePath] string filePath = null, [CallerMemberName] string methodName = null)
+        public async Task AssertQueryReturnsExpectedDataAsync(string query, [CallerFilePath] string filePath = null, [CallerMemberName] string methodName = null)
         {
             using var result = await Client.PostAsJsonAsync(string.Empty, new { query });
 
@@ -45,7 +48,7 @@ namespace ProductSuggestions.Tests.Integration.GraphQL
 
             var diff = patch.Diff(expected, data);
 
-            Console.WriteLine("Json Had the following differences:\n\n:" + diff?.ToString(Formatting.Indented));
+            _testOutput.Output.WriteLine("Json Had the following differences:\n\n:" + diff?.ToString(Formatting.Indented));
 
             Assert.Null(diff);
         }

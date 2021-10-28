@@ -3,41 +3,40 @@ using Xunit;
 
 namespace ProductSuggestions.Tests.Integration.GraphQL
 {
-    public class QueryByItemNumberIdShould : GraphQLIntegrationTestBase
+    public class QueryByItemNumberIdShould
     {
-        public QueryByItemNumberIdShould(InitializeFixture fixture) : base(fixture) { }
-        
+        private readonly GraphQLIntegrationTestHelper _graphQLIntegrationTestHelper;
+
+        public QueryByItemNumberIdShould(GraphQLIntegrationTestHelper graphQLIntegrationTestHelper)
+        {
+            _graphQLIntegrationTestHelper = graphQLIntegrationTestHelper;
+        }
+
+
         [Fact]
         public async Task ReturnAllFields()
         {
             string query = @"
                 {
-                  byItemNumberId(itemNumberId: 4)
+                  byItemNumberId(itemNumberId: 13)
                   {
                     itemNumberId
+                    virtualGroupId
                     name
                     category
-                    available
                     price
-                    upsells {
-                      itemNumberId
-                      name
-                      category
-                      available
-                      price
-                    }
-                    downsells {
-                      itemNumberId
-                      name
-                      category
-                      available
-                      price
+                    groupMembers
+                    {
+                        itemNumberId
+                        name
+                        category
+                        price    
                     }
                   }
                 }
             ";
 
-            await AssertQueryReturnsExpectedDataAsync(query);
+            await _graphQLIntegrationTestHelper.AssertQueryReturnsExpectedDataAsync(query);
         }
     }
 }
