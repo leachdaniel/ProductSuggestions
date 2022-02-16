@@ -4,7 +4,7 @@ namespace GraphQLProductsDemo.Products
 {
     public class Product : IGroupMember
     {
-        public Product(int itemNumberId, string name, string category, decimal price, int? virtualGroupId)
+        public Product(int itemNumberId, string name, string category, float price, int? virtualGroupId)
         {
             ItemNumberId = itemNumberId;
             Name = name;
@@ -22,7 +22,7 @@ namespace GraphQLProductsDemo.Products
 
         public string Category { get; private set; } = "Unknown";
 
-        public decimal Price { get; private set; }
+        public float Price { get; private set; }
 
         public int? VirtualGroupId { get; private set; }
     }

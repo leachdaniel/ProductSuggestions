@@ -4,7 +4,7 @@
     {
         string Category { get; }
         string Name { get; }
-        decimal Price { get; }
+        float Price { get; }
         int ItemNumberId { get; }
     }
 }

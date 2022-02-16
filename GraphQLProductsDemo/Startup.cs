@@ -26,7 +26,7 @@ namespace GraphQLProductsDemo
             // services.AddInMemorySubscriptions();
 
             // this enables you to use DataLoader in your resolvers.
-            services.AddDataLoaderRegistry();
+            //services.AddDataLoaderRegistry();
 
             services.RegisterAndPopulateLocalDatabase();
 
@@ -35,12 +35,9 @@ namespace GraphQLProductsDemo
             services.AddSingleton<IProductsRepository, ProductsRepository>();
 
             // Add GraphQL Services
-            services.AddGraphQL(sp =>
-                SchemaBuilder.New()
-                .AddServices(sp)
+            services.AddGraphQLServer()
                 .AddQueryType(_ => _.Name("Query"))
-                .AddType<ProductsQuery>()
-                .Create());
+                .AddType<ProductsQuery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +45,15 @@ namespace GraphQLProductsDemo
         {
             app
                 .UseRouting()
-                .UseWebSockets()
-                .UseGraphQL()
-                .UsePlayground()
+                .UseEndpoints(endpoints => {
+                    endpoints
+                        .MapGraphQL("/graphql")
+                        .WithOptions(new GraphQLServerOptions
+                        {
+                            AllowedGetOperations = AllowedGetOperations.QueryAndMutation
+                        });
+                })
+                //.UsePlayground("/graphql")
                 .UseVoyager();
         }
     }
