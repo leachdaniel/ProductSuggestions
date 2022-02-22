@@ -34,6 +34,8 @@ namespace GraphQLProductsDemo
             services.AddSingleton<IProductsDbConnection, ProductsDbConnection>();
             services.AddSingleton<IProductsRepository, ProductsRepository>();
 
+            services.AddControllers();
+
             // Add GraphQL Services
             services.AddGraphQLServer()
                 .AddQueryType(_ => _.Name("Query"))
@@ -46,8 +48,9 @@ namespace GraphQLProductsDemo
             app
                 .UseRouting()
                 .UseEndpoints(endpoints => {
-                    endpoints
-                        .MapGraphQL("/graphql")
+                    endpoints.MapControllers();
+
+                    endpoints.MapGraphQL("/graphql")
                         .WithOptions(new GraphQLServerOptions
                         {
                             AllowedGetOperations = AllowedGetOperations.QueryAndMutation
