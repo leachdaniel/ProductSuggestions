@@ -1,0 +1,34 @@
+﻿schema {
+  query: Query
+}
+
+type Query {
+  "provides product information"
+  byItemNumberId(itemNumberId: Int!): Product
+}
+
+type Product implements IGroupMember {
+  "unique identifier for a product"
+  itemNumberId: Int!
+  "the name of the product"
+  name: String!
+  "the category or kind of product"
+  category: String!
+  "the price the product is sold for"
+  price: Float!
+  "the group this product belongs to"
+  virtualGroupId: Int
+  "groupMembers"
+  groupMembers: [IGroupMember]
+}
+
+interface IGroupMember {
+  "unique identifier for a product"
+  itemNumberId: Int!
+  "the name of the product"
+  name: String!
+  "the category or kind of product"
+  category: String!
+  "the price the product is sold for"
+  price: Float!
+}
