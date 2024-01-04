@@ -17,6 +17,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <GraphQL Remove="Queries\GetProduct.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Scripts\0001 - CreateTables.sql" />
     <None Remove="Scripts\0002 - ImportProducts.sql" />
     <None Remove="Scripts\0003 - IX_Products_VirtualGroupId.sql" />
@@ -33,6 +37,7 @@
     <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
     <PackageReference Include="Dapper.SqlBuilder" Version="2.0.35" />
     <PackageReference Include="dbup" Version="4.4.0" />
+    <PackageReference Include="GreenDonut" Version="12.6.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.6.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.5" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.6.0" />
@@ -40,6 +45,9 @@
     <PackageReference Include="HotChocolate.Types.Sorting" Version="12.6.0" />
     <PackageReference Include="HotChocolate.Subscriptions.InMemory" Version="12.6.0" />
     <PackageReference Include="MartinCostello.SqlLocalDb" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="StrawberryShake.CodeGeneration.CSharp.Analyzers" Version="12.6.0" />
+    <PackageReference Include="StrawberryShake.Transport.Http" Version="12.6.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 

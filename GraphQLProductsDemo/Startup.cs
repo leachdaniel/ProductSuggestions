@@ -10,6 +10,8 @@ using GraphQLProductsDemo.Repositories;
 using GraphQLProductsDemo.DataAccess;
 using GraphQLProductsDemo.Products;
 using GraphQLProductsDemo.CreateDatabase;
+using GraphQLProductsDemo.DataLoaders;
+using GreenDonut;
 
 namespace GraphQLProductsDemo
 {
@@ -26,18 +28,17 @@ namespace GraphQLProductsDemo
             // services.AddInMemorySubscriptions();
 
             // this enables you to use DataLoader in your resolvers.
-            //services.AddDataLoaderRegistry();
-
             services.RegisterAndPopulateLocalDatabase();
 
             services.AddScoped<IProductsDbConnection, ProductsDbConnection>();
             services.AddSingleton<IProductsDbConnection, ProductsDbConnection>();
             services.AddSingleton<IProductsRepository, ProductsRepository>();
-
             services.AddControllers();
+            
 
             // Add GraphQL Services
             services.AddGraphQLServer()
+                .AddDataLoader<IDataLoader<int, Product>, ProductBatchDataLoader>()
                 .AddQueryType(_ => _.Name("Query"))
                 .AddType<ProductsQuery>();
         }
