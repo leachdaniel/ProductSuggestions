@@ -36,5 +36,14 @@ namespace GraphQLProductsDemo.Repositories
         public IProductsDbConnection Conn { get; }
 
         public Task<Product?> GetAsync(int itemNumberId) => Conn.GetAsync<Product>(itemNumberId);
+
+
+        public Task<IEnumerable<Product>> GetAsync(IEnumerable<int> itemNumberIds) =>
+            Conn.QueryAsync<Product>(@"
+                SELECT *
+                  FROM dbo.Products AS p
+                 WHERE p.ItemNumberId IN @ItemNumberIds",
+                new { itemNumberIds }
+            );
     }
 }

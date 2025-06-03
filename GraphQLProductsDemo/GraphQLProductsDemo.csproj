@@ -16,6 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <GraphQL Remove="Queries\GetProduct.graphql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Scripts\0001 - CreateTables.sql" />
     <None Remove="Scripts\0002 - ImportProducts.sql" />
     <None Remove="Scripts\0003 - IX_Products_VirtualGroupId.sql" />

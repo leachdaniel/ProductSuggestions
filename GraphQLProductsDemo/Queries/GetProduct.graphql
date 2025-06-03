@@ -1,0 +1,7 @@
+﻿query GetProduct {
+  byItemNumberId(itemNumberId: 13)
+  { 
+	price
+	name
+  }
+}

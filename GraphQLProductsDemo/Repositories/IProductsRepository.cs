@@ -8,6 +8,8 @@ namespace GraphQLProductsDemo.Repositories
     {
         Task<Product?> GetAsync(int itemNumberId);
 
+        Task<IEnumerable<Product>> GetAsync(IEnumerable<int> itemNumberIds);
+
         Task<IEnumerable<IGroupMember>> GetMembersAsync(Product product);
     }
 }
