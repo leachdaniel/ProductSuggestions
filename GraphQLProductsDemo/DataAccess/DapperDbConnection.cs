@@ -1,11 +1,11 @@
-﻿using Dapper;
-using Dapper.Contrib.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
+using Dapper.Contrib.Extensions;
+using Microsoft.Data.SqlClient;
 
 namespace GraphQLProductsDemo.DataAccess
 {
@@ -35,7 +35,6 @@ namespace GraphQLProductsDemo.DataAccess
             return SqlMapper.QueryAsync<T>(Conn, sql, param, transaction, commandTimeout, commandType);
         }
 
-
         public Task<T?> GetAsync<T>(dynamic key, IDbTransaction? transaction = null, int? commandTimeout = null)
             where T : class
         {
@@ -60,6 +59,7 @@ namespace GraphQLProductsDemo.DataAccess
             c.Open();
             return c;
         }
+
         private readonly Lazy<IDbConnection> _connection;
     }
 }

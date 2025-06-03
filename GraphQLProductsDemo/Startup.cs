@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using HotChocolate;
 using HotChocolate.AspNetCore;
-using HotChocolate.AspNetCore.Voyager;
-using HotChocolate.Subscriptions;
-using HotChocolate.Types;
 using GraphQLProductsDemo.Repositories;
 using GraphQLProductsDemo.DataAccess;
 using GraphQLProductsDemo.Products;
@@ -47,7 +44,8 @@ namespace GraphQLProductsDemo
         {
             app
                 .UseRouting()
-                .UseEndpoints(endpoints => {
+                .UseEndpoints(endpoints =>
+                {
                     endpoints.MapControllers();
 
                     endpoints.MapGraphQL("/graphql")
@@ -55,9 +53,7 @@ namespace GraphQLProductsDemo
                         {
                             AllowedGetOperations = AllowedGetOperations.QueryAndMutation
                         });
-                })
-                //.UsePlayground("/graphql")
-                .UseVoyager();
+                });
         }
     }
 }

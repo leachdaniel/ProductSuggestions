@@ -31,7 +31,7 @@ namespace GraphQLProductsDemo
             descriptor.Field("groupMembers")
                  .Description("groupMembers")
                  .Type<ListType<IGroupMemberType>>()
-                 .Resolver(_ => _productsRepository.GetMembersAsync(_.Parent<Product>()));
+                 .Resolve(_ => _productsRepository.GetMembersAsync(_.Parent<Product>()));
         }
 
 
